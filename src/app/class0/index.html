@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <title>Todo – Vanilla JS</title>
+  <style>
+    body { font: 16px/1.4 system-ui, sans-serif; max-width: 600px; margin: 40px auto; }
+    form { display: flex; gap: 8px; margin-bottom: 12px; }
+    input[type="text"]{ flex: 1; padding: 8px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+    li.done .text { text-decoration: line-through; opacity: .6; }
+    .spacer { flex: 1; }
+    .del { border: none; background: #eee; }
+    .counter { margin-top: 8px; color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Teendők</h1>
+
+  <form id="form">
+    <input id="input" type="text" placeholder="Új teendő..." />
+    <button type="submit">Hozzáad</button>
+  </form>
+
+  <ul id="list"></ul>
+  <div class="counter">Hátralévő: <span id="left">0</span></div>
+
+  <script>
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const list  = document.getElementById('list');
+    const left  = document.getElementById('left');
+
+    /** Alap állapot (adat) */
+    let items = [
+      { text: 'Angular telepítése', done: false },
+      { text: 'Első komponens',     done: true  }
+    ];
+
+    /** Render: DOM újrarajzolása az állapotból */
+    function render() {
+      list.innerHTML = ''; // teljes újrarender
+      items.forEach((item, idx) => {
+        const li = document.createElement('li');
+        if (item.done) li.classList.add('done');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = item.done;
+        checkbox.addEventListener('change', () => {
+          items[idx].done = checkbox.checked;
+          render();
+        });
+
+        const span = document.createElement('span');
+        span.className = 'text';
+        span.textContent = item.text;
+
+        const spacer = document.createElement('div');
+        spacer.className = 'spacer';
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'del';
+        delBtn.textContent = 'Törlés';
+        delBtn.addEventListener('click', () => {
+          items.splice(idx, 1);
+          render();
+        });
+
+        li.append(checkbox, span, spacer, delBtn);
+        list.appendChild(li);
+      });
+
+      left.textContent = items.filter(i => !i.done).length;
+      x.valami = 123; // teszt
+    }
+
+    /** Hozzáadás */
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const value = input.value.trim();
+      if (!value) return;
+      items.push({ text: value, done: false });
+      input.value = '';
+      render();
+    });
+
+    // első megjelenítés
+    render();
+  </script>
+</body>
+</html>
