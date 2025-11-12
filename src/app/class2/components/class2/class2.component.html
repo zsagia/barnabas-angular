@@ -1,0 +1,20 @@
+
+<ng-container *ngIf="todos$ | async as todos">
+  <section>
+      <h2>Components: Composition & Reuse</h2>
+
+      <p>Parent message: {{ title }}</p>
+
+      <app-badge [label]="badgeLabel"></app-badge>
+
+      <h3>Todo list (child components)</h3>
+
+      <form (ngSubmit)="add()">
+        <input type="text" [(ngModel)]="newText" name="newText" placeholder="Új teendő..." />
+        <button type="submit">Hozzáad</button>
+      </form>
+
+      <app-todo-list [items]="todos" (toggle)="toggle($event.index, $event.checked)" (remove)="remove($event)"></app-todo-list>
+      <app-stats [items]="todos"></app-stats>
+    </section>
+</ng-container>

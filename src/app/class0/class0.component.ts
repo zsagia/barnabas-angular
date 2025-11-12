@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-type Todo = { text: string; done: boolean };
+export type Todo = { text: string; done: boolean };
 
 @Component({
   selector: 'app-class0',
@@ -26,7 +26,8 @@ type Todo = { text: string; done: boolean };
       <button type="submit">Hozzáad</button>
     </form>
 
-    <ul>
+    <ul >
+        
       <li *ngFor="let item of items; let i = index" [class.done]="item.done">
         <input type="checkbox" [checked]="item.done" (change)="toggle(i, $event)" />
         <span class="text">{{ item.text }}</span>
@@ -39,11 +40,10 @@ type Todo = { text: string; done: boolean };
   `
 })
 export class Class0 {
-  newText = '';
-  items: Todo[] = [
-    { text: 'Angular telepítése', done: false },
-    { text: 'Első komponens',     done: true  }
-  ];
+    @Input() items: Todo[] = [];
+    @Output() itemsChange = new EventEmitter<Todo[]>();
+      newText = '';
+      constructor() {}
 
   get remaining() { return this.items.filter(i => !i.done).length; }
 
@@ -52,6 +52,7 @@ export class Class0 {
     if (!text) return;
     this.items = [...this.items, { text, done: false }]; // immutábilis frissítés (jó gyakorlat)
     this.newText = '';
+    this.itemsChange.emit(this.items);
   }
 
   toggle(index: number, event: Event) {

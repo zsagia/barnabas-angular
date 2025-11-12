@@ -1,0 +1,80 @@
+:host.class2-host {
+  display: block;
+  max-width: 700px;
+  margin: 32px auto;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fafafa;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.class2-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+ul { list-style: none; padding: 0; margin: 0; }
+li { display: flex; align-items: center; gap: 8px; padding: 6px 0; }
+.badge { margin-left: 8px; }
+
+/* Input and button styles */
+input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #8ab4ff;
+  box-shadow: 0 0 0 4px rgba(138,180,255,0.12);
+}
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background .12s ease, transform .06s ease;
+}
+
+button:hover {
+  background: #f2f2f2;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button.primary {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+button.primary:hover {
+  background: #0069e6;
+}
+
+/* small delete button */
+button.delete {
+  background: transparent;
+  border: none;
+  color: #c33;
+  padding: 4px 8px;
+}
+
+button.delete:hover { text-decoration: underline; }
