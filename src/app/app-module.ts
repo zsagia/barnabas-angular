@@ -11,7 +11,7 @@ import { TodoListComponent } from './class2/components/todo-list/todo-list.compo
 import { StatsComponent } from './class2/components/stats/stats.component';
 
 @NgModule({
-  declarations: [App, Class0, Class2Component, BadgeComponent, TodoListComponent, StatsComponent],
+  declarations: [App, Class0, BadgeComponent, Class2Component, TodoListComponent, StatsComponent],
   imports: [BrowserModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],

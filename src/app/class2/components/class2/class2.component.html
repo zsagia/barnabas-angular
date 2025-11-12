@@ -1,4 +1,3 @@
-
 <ng-container *ngIf="todos$ | async as todos">
   <section>
       <h2>Components: Composition & Reuse</h2>
@@ -10,8 +9,9 @@
       <h3>Todo list (child components)</h3>
 
       <form (ngSubmit)="add()">
-        <input type="text" [(ngModel)]="newText" name="newText" placeholder="Új teendő..." />
-        <button type="submit">Hozzáad</button>
+        <label for="newText" class="sr-only">Új teendő</label>
+        <input id="newText" type="text" [(ngModel)]="newText" name="newText" placeholder="Új teendő..." aria-label="Új teendő" />
+        <button class="primary" type="submit" aria-label="Hozzáad új teendőt">Hozzáad</button>
       </form>
 
       <app-todo-list [items]="todos" (toggle)="toggle($event.index, $event.checked)" (remove)="remove($event)"></app-todo-list>

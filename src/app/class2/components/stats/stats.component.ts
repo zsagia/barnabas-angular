@@ -5,6 +5,12 @@ type Todo = { text: string; done: boolean };
 @Component({
   selector: 'app-stats',
   standalone: false,
+  host: { 'class': 'stats-component' },
+  styles: [
+    `:host { display: block; padding: 8px 12px; border-radius: 8px; background: #eef9f0; color: #0b6b3a; margin-top: 12px; }
+     :host div { margin: 4px 0; }
+    `
+  ],
   template: `
     <div>
       <div>Total: {{ total }}</div>
